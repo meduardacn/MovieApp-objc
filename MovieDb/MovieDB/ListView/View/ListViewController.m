@@ -16,8 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    printf("%d", 1);
-    // Do any additional setup after loading the view.
 }
 
 
