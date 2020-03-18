@@ -12,7 +12,7 @@
 
 @interface DetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *cardImage;
-@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UILabel *movieTitle;
 @property (weak, nonatomic) IBOutlet UILabel *category;
 @property (weak, nonatomic) IBOutlet UILabel *score;
 @property (weak, nonatomic) IBOutlet UITextView *overviewText;
@@ -23,7 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _cardImage.layer.cornerRadius = 10;
+
 }
 
 
