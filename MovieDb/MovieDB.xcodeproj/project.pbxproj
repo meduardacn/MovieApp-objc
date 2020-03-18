@@ -14,6 +14,7 @@
 		60FA97A524213A8500A087A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60FA97A424213A8500A087A6 /* Assets.xcassets */; };
 		60FA97A824213A8500A087A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60FA97A624213A8500A087A6 /* LaunchScreen.storyboard */; };
 		60FA97AB24213A8500A087A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FA97AA24213A8500A087A6 /* main.m */; };
+		60FA97CE242267DA00A087A6 /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60FA97CD242267DA00A087A6 /* Details.storyboard */; };
 		F280295F24214A8500D402F5 /* ListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F280295E24214A8500D402F5 /* ListView.storyboard */; };
 		F28029642421B63700D402F5 /* ListType.m in Sources */ = {isa = PBXBuildFile; fileRef = F28029632421B63700D402F5 /* ListType.m */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		60FA97A724213A8500A087A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60FA97A924213A8500A087A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60FA97AA24213A8500A087A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		60FA97CD242267DA00A087A6 /* Details.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Details.storyboard; sourceTree = "<group>"; };
 		F280295E24214A8500D402F5 /* ListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListView.storyboard; sourceTree = "<group>"; };
 		F28029632421B63700D402F5 /* ListType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ListType.m; path = MovieDB/ListView/View/ListType.m; sourceTree = SOURCE_ROOT; };
 		F28029652421C82E00D402F5 /* ListType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ListType.h; path = MovieDB/ListView/View/ListType.h; sourceTree = SOURCE_ROOT; };
@@ -132,6 +134,7 @@
 		60FA97C324213EFD00A087A6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				60FA97CD242267DA00A087A6 /* Details.storyboard */,
 			);
 			name = View;
 			path = MovieDB/DetailsViw/View;
@@ -201,7 +204,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 60FA979024213A8300A087A6 /* Build configuration list for PBXProject "MovieDb" */;
+			buildConfigurationList = 60FA979024213A8300A087A6 /* Build configuration list for PBXProject "MovieDB" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -224,6 +227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60FA97CE242267DA00A087A6 /* Details.storyboard in Resources */,
 				60FA97A824213A8500A087A6 /* LaunchScreen.storyboard in Resources */,
 				F280295F24214A8500D402F5 /* ListView.storyboard in Resources */,
 				60FA97A524213A8500A087A6 /* Assets.xcassets in Resources */,
@@ -413,7 +417,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		60FA979024213A8300A087A6 /* Build configuration list for PBXProject "MovieDb" */ = {
+		60FA979024213A8300A087A6 /* Build configuration list for PBXProject "MovieDB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60FA97AC24213A8500A087A6 /* Debug */,
