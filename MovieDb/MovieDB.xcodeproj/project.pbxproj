@@ -16,9 +16,8 @@
 		60FA97A824213A8500A087A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60FA97A624213A8500A087A6 /* LaunchScreen.storyboard */; };
 		60FA97AB24213A8500A087A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FA97AA24213A8500A087A6 /* main.m */; };
 		60FA97CE242267DA00A087A6 /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60FA97CD242267DA00A087A6 /* Details.storyboard */; };
-		60FA97D324226D8E00A087A6 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FA97D224226D8E00A087A6 /* DetailsViewController.m */; };
 		F280295F24214A8500D402F5 /* ListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F280295E24214A8500D402F5 /* ListView.storyboard */; };
-		F28029642421B63700D402F5 /* ListType.m in Sources */ = {isa = PBXBuildFile; fileRef = F28029632421B63700D402F5 /* ListType.m */; };
+		F28029682422C61200D402F5 /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F28029672422C61200D402F5 /* ListTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,8 +39,8 @@
 		60FA97D224226D8E00A087A6 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		60FA97D424226DA000A087A6 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		F280295E24214A8500D402F5 /* ListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListView.storyboard; sourceTree = "<group>"; };
-		F28029632421B63700D402F5 /* ListType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ListType.m; path = MovieDB/ListView/View/ListType.m; sourceTree = SOURCE_ROOT; };
-		F28029652421C82E00D402F5 /* ListType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ListType.h; path = MovieDB/ListView/View/ListType.h; sourceTree = SOURCE_ROOT; };
+		F28029662422C61200D402F5 /* ListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
+		F28029672422C61200D402F5 /* ListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +54,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		60A5D4F724241C66001970E4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				60A5D4F424240D0F001970E4 /* Details.m */,
+				60A5D4F62424100C001970E4 /* Details.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		60FA978C24213A8300A087A6 = {
 			isa = PBXGroup;
 			children = (
@@ -85,11 +93,10 @@
 		60FA97BC24213EAC00A087A6 /* DetailsView */ = {
 			isa = PBXGroup;
 			children = (
+				60A5D4F724241C66001970E4 /* Model */,
 				60FA97CD242267DA00A087A6 /* Details.storyboard */,
 				60FA97D224226D8E00A087A6 /* DetailsViewController.m */,
 				60FA97D424226DA000A087A6 /* DetailsViewController.h */,
-				60A5D4F424240D0F001970E4 /* Details.m */,
-				60A5D4F62424100C001970E4 /* Details.h */,
 			);
 			path = DetailsView;
 			sourceTree = "<group>";
@@ -97,25 +104,15 @@
 		60FA97BE24213EE800A087A6 /* ListView */ = {
 			isa = PBXGroup;
 			children = (
-				60FA97BF24213EE800A087A6 /* Presenter */,
 				60FA97C024213EE800A087A6 /* Model */,
 				60FA97C124213EE800A087A6 /* View */,
 			);
 			path = ListView;
 			sourceTree = "<group>";
 		};
-		60FA97BF24213EE800A087A6 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
 		60FA97C024213EE800A087A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F28029632421B63700D402F5 /* ListType.m */,
-				F28029652421C82E00D402F5 /* ListType.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -125,6 +122,8 @@
 			children = (
 				60FA979E24213A8300A087A6 /* ListViewController.h */,
 				60FA979F24213A8300A087A6 /* ListViewController.m */,
+				F28029662422C61200D402F5 /* ListTableViewCell.h */,
+				F28029672422C61200D402F5 /* ListTableViewCell.m */,
 				F280295E24214A8500D402F5 /* ListView.storyboard */,
 			);
 			path = View;
@@ -220,8 +219,7 @@
 				60FA97A024213A8300A087A6 /* ListViewController.m in Sources */,
 				60FA979A24213A8300A087A6 /* AppDelegate.m in Sources */,
 				60FA97AB24213A8500A087A6 /* main.m in Sources */,
-				60FA97D324226D8E00A087A6 /* DetailsViewController.m in Sources */,
-				F28029642421B63700D402F5 /* ListType.m in Sources */,
+				F28029682422C61200D402F5 /* ListTableViewCell.m in Sources */,
 				60FA979D24213A8300A087A6 /* SceneDelegate.m in Sources */,
 				60A5D4F524240D0F001970E4 /* Details.m in Sources */,
 			);
