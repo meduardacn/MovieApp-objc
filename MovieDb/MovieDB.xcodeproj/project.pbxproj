@@ -16,7 +16,6 @@
 		60FA97AB24213A8500A087A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FA97AA24213A8500A087A6 /* main.m */; };
 		60FA97CE242267DA00A087A6 /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60FA97CD242267DA00A087A6 /* Details.storyboard */; };
 		60FA97D324226D8E00A087A6 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FA97D224226D8E00A087A6 /* DetailsViewController.m */; };
-		60FA97D62422A2D100A087A6 /* DetailsPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FA97D52422A2D100A087A6 /* DetailsPresenter.m */; };
 		F280295F24214A8500D402F5 /* ListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F280295E24214A8500D402F5 /* ListView.storyboard */; };
 		F28029642421B63700D402F5 /* ListType.m in Sources */ = {isa = PBXBuildFile; fileRef = F28029632421B63700D402F5 /* ListType.m */; };
 /* End PBXBuildFile section */
@@ -37,9 +36,6 @@
 		60FA97CD242267DA00A087A6 /* Details.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Details.storyboard; sourceTree = "<group>"; };
 		60FA97D224226D8E00A087A6 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		60FA97D424226DA000A087A6 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
-		60FA97D52422A2D100A087A6 /* DetailsPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsPresenter.m; sourceTree = "<group>"; };
-		60FA97D72422A2E900A087A6 /* DetailsPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsPresenter.h; sourceTree = "<group>"; };
-		60FA97D92422A4C300A087A6 /* DetailsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsProtocol.h; sourceTree = "<group>"; };
 		F280295E24214A8500D402F5 /* ListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListView.storyboard; sourceTree = "<group>"; };
 		F28029632421B63700D402F5 /* ListType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ListType.m; path = MovieDB/ListView/View/ListType.m; sourceTree = SOURCE_ROOT; };
 		F28029652421C82E00D402F5 /* ListType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ListType.h; path = MovieDB/ListView/View/ListType.h; sourceTree = SOURCE_ROOT; };
@@ -76,7 +72,6 @@
 			isa = PBXGroup;
 			children = (
 				60FA97C724213F4100A087A6 /* Services */,
-				60FA97C624213F2500A087A6 /* New Group */,
 				60FA97BE24213EE800A087A6 /* ListView */,
 				60FA97BC24213EAC00A087A6 /* DetailsView */,
 				60FA97A924213A8500A087A6 /* Info.plist */,
@@ -87,10 +82,9 @@
 		60FA97BC24213EAC00A087A6 /* DetailsView */ = {
 			isa = PBXGroup;
 			children = (
-				60FA97D82422A36A00A087A6 /* Protocol */,
-				60FA97C224213EFD00A087A6 /* Model */,
-				60FA97C424213EFD00A087A6 /* Presenter */,
-				60FA97C324213EFD00A087A6 /* View */,
+				60FA97CD242267DA00A087A6 /* Details.storyboard */,
+				60FA97D224226D8E00A087A6 /* DetailsViewController.m */,
+				60FA97D424226DA000A087A6 /* DetailsViewController.h */,
 			);
 			path = DetailsView;
 			sourceTree = "<group>";
@@ -131,42 +125,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		60FA97C224213EFD00A087A6 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Model;
-			path = MovieDB/DetailsViw/Model;
-			sourceTree = SOURCE_ROOT;
-		};
-		60FA97C324213EFD00A087A6 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				60FA97CD242267DA00A087A6 /* Details.storyboard */,
-				60FA97D224226D8E00A087A6 /* DetailsViewController.m */,
-				60FA97D424226DA000A087A6 /* DetailsViewController.h */,
-			);
-			name = View;
-			path = MovieDB/DetailsViw/View;
-			sourceTree = SOURCE_ROOT;
-		};
-		60FA97C424213EFD00A087A6 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				60FA97D52422A2D100A087A6 /* DetailsPresenter.m */,
-				60FA97D72422A2E900A087A6 /* DetailsPresenter.h */,
-			);
-			name = Presenter;
-			path = MovieDB/DetailsViw/Presenter;
-			sourceTree = SOURCE_ROOT;
-		};
-		60FA97C624213F2500A087A6 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		60FA97C724213F4100A087A6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,14 +138,6 @@
 				60FA97AA24213A8500A087A6 /* main.m */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		60FA97D82422A36A00A087A6 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				60FA97D92422A4C300A087A6 /* DetailsProtocol.h */,
-			);
-			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,7 +217,6 @@
 				60FA97AB24213A8500A087A6 /* main.m in Sources */,
 				60FA97D324226D8E00A087A6 /* DetailsViewController.m in Sources */,
 				F28029642421B63700D402F5 /* ListType.m in Sources */,
-				60FA97D62422A2D100A087A6 /* DetailsPresenter.m in Sources */,
 				60FA979D24213A8300A087A6 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

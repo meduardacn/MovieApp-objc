@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DetailsProtocol.h"
 #import "DetailsViewController.h"
 
-@interface DetailsViewController () <DetailsProtocol>
+@interface DetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *cardImage;
 @property (weak, nonatomic) IBOutlet UILabel *movieTitle;
 @property (weak, nonatomic) IBOutlet UILabel *category;
@@ -27,10 +26,5 @@
     _cardImage.layer.cornerRadius = 10;
 
 }
-
-- (void)someMethod {
-    printf("text");
-}
-
 
 @end
