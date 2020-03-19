@@ -122,10 +122,23 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="1HG-4N-kFm"/>
+                    <connections>
+                        <segue destination="LRZ-AR-pXg" kind="show" identifier="detailSegue" id="eSk-sE-cZc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dwr-jM-VfT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="927.536231884058" y="96.428571428571431"/>
+        </scene>
+        <!--Storyboard Reference-->
+        <scene sceneID="twV-kS-7rM">
+            <objects>
+                <viewControllerPlaceholder id="LRZ-AR-pXg" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Lsi-Gp-TYw"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z4v-dX-MBY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1636" y="96"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Q1-pY-7Tl">
