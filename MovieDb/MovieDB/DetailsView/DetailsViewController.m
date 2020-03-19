@@ -22,30 +22,27 @@
  
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getMovieDetails: @(684545)];
 }
 
--(void)getMovieDetails: (int)  movieId {
-    NSString* mId = [@(movieId) stringValue];
-    NSString *urlString = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=e33d6d132f3f10c719d71ad8b3149066&language=en-US", mId];
-
+-(void)getMovieDetails: (NSString *)  movieId {
+    NSString *urlString = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=e33d6d132f3f10c719d71ad8b3149066&language=en-US", movieId];
+    
     NSURL *url = [NSURL URLWithString: urlString ];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"GET"];
+    [request setURL: url];
 
-    NSURLSession *session = [NSURLSession sharedSession];
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
+      ^(NSData * _Nullable data,
+        NSURLResponse * _Nullable response,
+        NSError * _Nullable error) {
 
-    NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSError *erro = nil;
-        if (task!=nil) {
-           id jsonObject = [NSJSONSerialization
-                                JSONObjectWithData:[task dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&error];
-           if (jsonObject != nil && error == nil) {
-             NSLog(@"Successfully deserialized...");
-           }
-        }
-//        dispatch_sync(dispatch_get_main_queue(),^{
-//            [tanl reloadData];
-//        });
-    }];
-    [task resume];
+          NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+          NSLog(@"Data received: %@", myString);
+    }] resume];
+
     
 }
 
