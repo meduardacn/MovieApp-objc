@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DetailsViewController.h"
+#import "Details.h"
 
 @interface DetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *cardImage;
@@ -22,10 +23,12 @@
  
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getMovieDetails: @(684545)];
+    [self getMovieDetails: @(419704)];
 }
 
 -(void)getMovieDetails: (NSString *)  movieId {
+    Details *movie = [[Details alloc]init];
+    NSData *dataJson;
     NSString *urlString = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=e33d6d132f3f10c719d71ad8b3149066&language=en-US", movieId];
     
     NSURL *url = [NSURL URLWithString: urlString ];
@@ -38,12 +41,19 @@
       ^(NSData * _Nullable data,
         NSURLResponse * _Nullable response,
         NSError * _Nullable error) {
-
-          NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-          NSLog(@"Data received: %@", myString);
+            
+            NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"Data received: %@", myString);
+        
+            NSData *dataJson = [myString dataUsingEncoding:NSUTF8StringEncoding];
+            id json = [NSJSONSerialization JSONObjectWithData:dataJson options:0 error:nil];
+            [movie initWithJson: json];
+        
     }] resume];
-
+    //        self.movieTitle.text = [json objectForKey:@"original_title"];
+    //        self.movieTitle.text = movie.title;
     
 }
 
 @end
+

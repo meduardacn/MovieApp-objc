@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60A5D4F524240D0F001970E4 /* Details.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A5D4F424240D0F001970E4 /* Details.m */; };
 		60FA979A24213A8300A087A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FA979924213A8300A087A6 /* AppDelegate.m */; };
 		60FA979D24213A8300A087A6 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FA979C24213A8300A087A6 /* SceneDelegate.m */; };
 		60FA97A024213A8300A087A6 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FA979F24213A8300A087A6 /* ListViewController.m */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		60A5D4F424240D0F001970E4 /* Details.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Details.m; sourceTree = "<group>"; };
+		60A5D4F62424100C001970E4 /* Details.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Details.h; sourceTree = "<group>"; };
 		60FA979524213A8300A087A6 /* MovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60FA979824213A8300A087A6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		60FA979924213A8300A087A6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -85,6 +88,8 @@
 				60FA97CD242267DA00A087A6 /* Details.storyboard */,
 				60FA97D224226D8E00A087A6 /* DetailsViewController.m */,
 				60FA97D424226DA000A087A6 /* DetailsViewController.h */,
+				60A5D4F424240D0F001970E4 /* Details.m */,
+				60A5D4F62424100C001970E4 /* Details.h */,
 			);
 			path = DetailsView;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				60FA97D324226D8E00A087A6 /* DetailsViewController.m in Sources */,
 				F28029642421B63700D402F5 /* ListType.m in Sources */,
 				60FA979D24213A8300A087A6 /* SceneDelegate.m in Sources */,
+				60A5D4F524240D0F001970E4 /* Details.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
