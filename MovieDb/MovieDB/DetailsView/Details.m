@@ -18,21 +18,19 @@
 
 -(id)initWithJson:(NSDictionary*)json {
     if (self = [super init]) {
-//        NSArray* genreslist = [json objectForKey:@"genres"];
-//        for (int i = 0; i < genreslist.count; i++) {
-//            NSLog(@"%@",genreslist[i][1]);
-//        }
+        NSString* allGenres = @"| ";
+        for (NSDictionary *dictionary in [json objectForKey:@"genres"]) {
+            allGenres = [allGenres stringByAppendingString: [dictionary valueForKey:@"name"] ];
+            allGenres = [allGenres stringByAppendingString: @" | " ];
+        }
+        self.genres = allGenres;
         self.title = [json objectForKey:@"title"];
         self.overview = [json objectForKey:@"overview"];
         self.vote_average = [json objectForKey:@"vote_average"];
         self.movieID = [json objectForKey:@"id"];
+        
       }
     return self;
 }
-//
-//-(void)dealloc {
-//  [firstName release];
-//  [lastName release];
-//  [super dealloc];
-//}
+
 @end

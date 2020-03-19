@@ -43,16 +43,19 @@
         NSError * _Nullable error) {
             
             NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//            NSLog(@"Data received: %@", myString);
         
             NSData *dataJson = [myString dataUsingEncoding:NSUTF8StringEncoding];
             id json = [NSJSONSerialization JSONObjectWithData:dataJson options:0 error:nil];
             [movie initWithJson: json];
         
     }] resume];
-    //        self.movieTitle.text = [json objectForKey:@"original_title"];
-    //        self.movieTitle.text = movie.title;
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.movieTitle.text = movie.title;
+        self.category.text = movie.genres;
+        self.score.text = [NSString stringWithFormat:@"%@",movie.vote_average]; 
+        self.overviewText.text = movie.overview;
+    });
 }
 
 @end
