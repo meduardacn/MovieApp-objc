@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Network.h"
 
-@interface DetailsViewController : UIViewController
+
+@interface DetailsViewController : UIViewController{
+    Network* network;
+}
+
+@property(nonatomic,retain) Network* network;
 
 @end
