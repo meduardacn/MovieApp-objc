@@ -11,11 +11,6 @@
 #import "Details.h"
 
 @interface DetailsViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *cardImage;
-@property (weak, nonatomic) IBOutlet UILabel *movieTitle;
-@property (weak, nonatomic) IBOutlet UILabel *category;
-@property (weak, nonatomic) IBOutlet UILabel *score;
-@property (weak, nonatomic) IBOutlet UITextView *overviewText;
 
 @end
 
@@ -24,6 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getMovieDetails: @(419704)];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.movieTitle.text = self.testemovie;
 }
 
 -(void)getMovieDetails: (NSString *)  movieId {

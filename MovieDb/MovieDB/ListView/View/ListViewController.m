@@ -8,7 +8,8 @@
 
 #import "ListViewController.h"
 #import "ListTableViewCell.h"
-
+#import "DetailsViewController.h"
+#import "Details.h"
 
 @interface ListViewController ()
 
@@ -18,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 }
 
 // MARK: - TableView Properties
@@ -60,8 +63,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ListTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     [self performSegueWithIdentifier:@"detailSegue" sender:cell];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"detailSegue"]) {
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        DetailsViewController *detViewController = segue.destinationViewController;
+        Details *movie = Details.new;
+        
+        detViewController.cardImage.image = [UIImage imageNamed:@"moviePoster"];
+        detViewController.movieTitle.text = movie.title;
+        detViewController.category.text = movie.genres;
+        detViewController.score.text = movie.vote_average;
+        detViewController.overviewText.text = movie.overview;
+        
+    }
 }
 
 @end

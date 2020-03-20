@@ -10,7 +10,7 @@
         <!--Details-->
         <scene sceneID="vwP-rZ-WKY">
             <objects>
-                <viewController title="Details" id="2X3-Tn-cCV" customClass="DetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailView" title="Details" id="2X3-Tn-cCV" customClass="DetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yb6-yb-Nmt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -100,11 +100,11 @@
                         <viewLayoutGuide key="safeArea" id="QcL-is-Hzu"/>
                     </view>
                     <connections>
-                        <outlet property="cardImage" destination="QUL-60-p37" id="H16-hA-ioA"/>
-                        <outlet property="category" destination="dEM-aW-cKY" id="BS8-GZ-d4j"/>
-                        <outlet property="movieTitle" destination="d7W-ap-r10" id="fey-do-iGS"/>
-                        <outlet property="overviewText" destination="Qzj-RJ-yTE" id="ccs-sd-Ilq"/>
-                        <outlet property="score" destination="Xw8-Ub-pre" id="GHc-eu-kmd"/>
+                        <outlet property="cardImage" destination="QUL-60-p37" id="av6-ij-FI7"/>
+                        <outlet property="category" destination="dEM-aW-cKY" id="YPh-IP-Ts0"/>
+                        <outlet property="movieTitle" destination="d7W-ap-r10" id="eoN-L0-CjA"/>
+                        <outlet property="overviewText" destination="Qzj-RJ-yTE" id="w96-Gi-lo8"/>
+                        <outlet property="score" destination="Xw8-Ub-pre" id="kM9-Q1-bGr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7oN-Ep-lf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

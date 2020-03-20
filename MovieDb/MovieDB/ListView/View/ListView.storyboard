@@ -130,10 +130,10 @@
             </objects>
             <point key="canvasLocation" x="927.536231884058" y="96.428571428571431"/>
         </scene>
-        <!--Storyboard Reference-->
+        <!--DetailView-->
         <scene sceneID="twV-kS-7rM">
             <objects>
-                <viewControllerPlaceholder id="LRZ-AR-pXg" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Details" referencedIdentifier="DetailView" id="LRZ-AR-pXg" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Lsi-Gp-TYw"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4v-dX-MBY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
