@@ -41,5 +41,20 @@
     }] resume];
 }
 
+-(void) fetchMovies:(NSString *) type  withCompletionHandler: (void (^)(NSArray *))completionHandler{
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US&page=1", type, apiKey]];
+    [request setURL: url];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
+      ^(NSData * _Nullable data,
+        NSURLResponse * _Nullable response,
+        NSError * _Nullable error) {
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        NSArray *array = [self->parser parseMoviesWithJson: json];
+        completionHandler(array);
+    }] resume];
+}
+
 @end
 

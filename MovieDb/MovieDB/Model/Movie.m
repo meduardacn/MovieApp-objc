@@ -10,10 +10,9 @@
 #import "Movie.h"
 
 @interface Movie ()
-
 @end
 
 @implementation Movie
-@synthesize title, genres, overview,vote_average, movieID;
+@synthesize title, genres, overview,vote_average, movieID,poster;
 
 @end

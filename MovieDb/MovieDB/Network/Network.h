@@ -20,5 +20,11 @@
 @property(nonatomic,retain) Parser* parser;
 
 -(instancetype)init;
+
 -(void) fetchMovieWithID: (NSString *) movieId withCompletionHandler: (void (^)(Movie *))completionHandler;
+
+-(void) fetchMovies:(NSString *) movieId  withCompletionHandler: (void (^)(NSArray *))completionHandler;
+
+-(void) fetchCAPAWithID: (Movie *) movie withCompletionHandler: (void (^)(Movie *))completionHandler;
+
 @end

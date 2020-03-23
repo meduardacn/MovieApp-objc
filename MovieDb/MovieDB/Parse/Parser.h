@@ -9,6 +9,6 @@
 
 @interface Parser: NSObject
 
-- (Movie *) parseMovieWithJson:(NSDictionary *)dictionary;
-
+- (Movie *) parseMovieWithJson:(NSDictionary *)json;
+- (NSArray *) parseMoviesWithJson:(NSDictionary *)json;
 @end

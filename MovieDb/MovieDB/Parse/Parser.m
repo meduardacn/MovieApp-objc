@@ -27,8 +27,17 @@
     movie.overview = [json objectForKey:@"overview"];
     movie.vote_average = [json objectForKey:@"vote_average"];
     movie.movieID = [json objectForKey:@"id"];
-    
+    movie.poster = [json objectForKey:@"poster_path"];
     return movie;
+}
+
+- (NSArray *) parseMoviesWithJson:(NSDictionary *)json{
+    NSMutableArray *array = @[].mutableCopy;
+    for(NSDictionary *dictionary in json){
+        Movie *movie = [self parseMovieWithJson: dictionary];
+        [array addObject:movie];
+    }
+    return array;
 }
 
 @end
