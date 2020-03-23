@@ -34,7 +34,7 @@
 					<key>UISceneDelegateClassName</key>
 					<string>SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
-					<string>Details</string>
+					<string>ListView</string>
 				</dict>
 			</array>
 		</dict>
@@ -42,7 +42,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Details</string>
+	<string>ListView</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
