@@ -27,5 +27,4 @@
 @property(nonatomic,retain) NSString* poster_path;
 @property(nonatomic,retain) NSData* poster;
 
-
 @end

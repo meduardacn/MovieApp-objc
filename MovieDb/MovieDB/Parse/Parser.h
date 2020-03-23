@@ -8,8 +8,6 @@
 #import "Movie.h"
 
 @interface Parser: NSObject
-
-- (Movie *) parseMovie: (Movie *) movie withJson:(NSDictionary *)json;
-- (Movie *) parseMovieWithJson:(NSDictionary *)json;
+- (Movie *) parseDetailsFrom: (Movie *) movie withJson:(NSDictionary *)json;
 - (NSArray *) parseMoviesWithJson:(NSDictionary *)json;
 @end

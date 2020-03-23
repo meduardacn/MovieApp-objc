@@ -13,7 +13,9 @@
 @interface DetailsViewController : UIViewController{
     Network* network;
 }
-
 @property(nonatomic,retain) Network* network;
+
+-(void)fetchMovieDetails: (Movie *)  movie;
+-(void)getMovieDetails: (NSString *)  movieId;
 
 @end

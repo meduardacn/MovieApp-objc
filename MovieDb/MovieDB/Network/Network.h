@@ -21,12 +21,10 @@
 
 -(instancetype)init;
 
--(void) fetchMovieWithID: (NSString *) movieId withCompletionHandler: (void (^)(Movie *))completionHandler;
-
--(void) fetchMovie: (Movie *) movie withCompletionHandler: (void (^)(Movie *))completionHandler;
-
+-(void) fetchMovieDetails: (Movie *) movie withCompletionHandler: (void (^)(Movie *))completionHandler;
 -(void) fetchMovies:(NSString *) movieId  withCompletionHandler: (void (^)(NSArray *))completionHandler;
 
--(void) fetchPoster: (Movie *) movie withCompletionHandler: (void (^)(Movie *))completionHandler;
 
+//MARK: function for testing
+-(void) fetchMovieWithID: (NSString *) movieId withCompletionHandler: (void (^)(Movie *))completionHandler;
 @end

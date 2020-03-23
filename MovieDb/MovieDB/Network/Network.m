@@ -11,6 +11,8 @@
 #import "Movie.h"
 
 @interface Network ()
+
+-(void) fetchPoster: (NSString *) poster_path withCompletionHandler: (void (^)(NSData *))completionHandler;
 @end
 
 @implementation Network
@@ -27,21 +29,8 @@
     return self;
 }
 
--(void) fetchMovieWithID: (NSString *) movieId withCompletionHandler: (void (^)(Movie *))completionHandler {
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US", movieId, apiKey]];
-    [request setURL: url];
-
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
-      ^(NSData * _Nullable data,
-        NSURLResponse * _Nullable response,
-        NSError * _Nullable error) {
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        Movie *movie = [self->parser parseMovieWithJson: json];
-        completionHandler(movie);
-    }] resume];
-}
-
--(void) fetchMovie: (Movie *) movie withCompletionHandler: (void (^)(Movie *))completionHandler {
+//MARK: Function to call in DetailsViewController passing movie
+-(void) fetchMovieDetails: (Movie *) movie withCompletionHandler: (void (^)(Movie *))completionHandler {
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US", movie.movieID, apiKey]];
     [request setURL: url];
     
@@ -50,11 +39,12 @@
         NSURLResponse * _Nullable response,
         NSError * _Nullable error) {
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        Movie *newMovie = [self->parser parseMovie: movie withJson: json];
+        Movie *newMovie = [self->parser parseDetailsFrom: movie withJson:json];
         completionHandler(newMovie);
     }] resume];
 }
 
+//MARK: Function to call in ListViewController passing "now_playing" or "popular"
 -(void) fetchMovies:(NSString *) type  withCompletionHandler: (void (^)(NSArray *))completionHandler{
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US&page=1", type, apiKey]];
     [request setURL: url];
@@ -66,24 +56,43 @@
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
         NSArray *array = [self->parser parseMoviesWithJson: json];
+        for(Movie* m in array){
+            [self fetchPoster: m.poster_path withCompletionHandler: ^(NSData* poster){
+                m.poster = poster;
+            }];
+        }
         completionHandler(array);
     }] resume];
 }
 
--(void) fetchPoster: (Movie *) movie withCompletionHandler: (void (^)(Movie *))completionHandler{
-      NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@",movie.poster]];
+//MARK: private function
+-(void) fetchPoster: (NSString *) poster_path withCompletionHandler: (void (^)(NSData *))completionHandler{
+      NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@",poster_path]];
         [request setURL: url];
         
         [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
           ^(NSData * _Nullable data,
             NSURLResponse * _Nullable response,
             NSError * _Nullable error) {
-            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            
-            NSArray *array = [self->parser parseMoviesWithJson: json];
-            completionHandler(array);
+            completionHandler(data);
         }] resume];
     }
+
+//MARK: function for testing
+-(void) fetchMovieWithID: (NSString *) movieId withCompletionHandler: (void (^)(Movie *))completionHandler {
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US", movieId, apiKey]];
+    [request setURL: url];
+
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
+      ^(NSData * _Nullable data,
+        NSURLResponse * _Nullable response,
+        NSError * _Nullable error) {
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        Movie *movie = [[Movie alloc] init];
+        movie = [self->parser parseDetailsFrom: movie withJson:json];
+        completionHandler(movie);
+    }] resume];
+}
 
 @end
 
