@@ -31,6 +31,21 @@
     return movie;
 }
 
+- (Movie *) parseMovie: (Movie *) movie withJson:(NSDictionary *)json {
+    NSString* allGenres = @"| ";
+    for (NSDictionary *dictionary in [json objectForKey:@"genres"]) {
+        allGenres = [allGenres stringByAppendingString: [dictionary valueForKey:@"name"] ];
+        allGenres = [allGenres stringByAppendingString: @" | " ];
+    }
+    movie.genres = allGenres;
+    movie.title =  [json objectForKey:@"title"];
+    movie.overview = [json objectForKey:@"overview"];
+    movie.vote_average = [json objectForKey:@"vote_average"];
+    movie.movieID = [json objectForKey:@"id"];
+    movie.poster = [json objectForKey:@"poster_path"];
+    return movie;
+}
+
 - (NSArray *) parseMoviesWithJson:(NSDictionary *)json{
     NSMutableArray *array = @[].mutableCopy;
     for(NSDictionary *dictionary in json){

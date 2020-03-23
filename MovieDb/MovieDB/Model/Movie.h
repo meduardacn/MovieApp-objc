@@ -15,7 +15,8 @@
     NSString* overview;
     NSString* vote_average;
     NSString* movieID;
-    NSString* poster;
+    NSData* poster;
+    NSString* poster_path;
 }
 
 @property(nonatomic,retain) NSString* title;
@@ -23,6 +24,8 @@
 @property(nonatomic,retain) NSString* overview;
 @property(nonatomic,retain) NSString* vote_average;
 @property(nonatomic,retain) NSString* movieID;
-@property(nonatomic,retain) NSString* poster;
+@property(nonatomic,retain) NSString* poster_path;
+@property(nonatomic,retain) NSData* poster;
+
 
 @end
