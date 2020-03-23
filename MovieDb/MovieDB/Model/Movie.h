@@ -1,5 +1,5 @@
 //
-//  Details.h
+//  Movie.h
 //  MovieDB
 //
 //  Created by Maria Eduarda Casanova Nascimento on 19/03/20.
@@ -9,12 +9,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Details : NSObject {
+@interface Movie : NSObject {
     NSString* title;
     NSString* genres;
     NSString* overview;
     NSString* vote_average;
     NSString* movieID;
+    NSData* poster;
+    NSString* poster_path;
 }
 
 @property(nonatomic,retain) NSString* title;
@@ -22,7 +24,7 @@
 @property(nonatomic,retain) NSString* overview;
 @property(nonatomic,retain) NSString* vote_average;
 @property(nonatomic,retain) NSString* movieID;
-
--(id)initWithJson:(NSDictionary*)json;
+@property(nonatomic,retain) NSString* poster_path;
+@property(nonatomic,retain) NSData* poster;
 
 @end
