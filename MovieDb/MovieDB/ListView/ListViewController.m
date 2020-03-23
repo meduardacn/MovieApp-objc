@@ -11,18 +11,21 @@
 
 
 @interface ListViewController ()
-
+- (void) loadPopularMovies;
+- (void) loadNowPlayingMovies;
 @end
 
 @implementation ListViewController
+@synthesize network, popular, nowPlaying;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadPopularMovies];
+    [self loadNowPlayingMovies];
 }
 
 // MARK: - TableView Properties
-
--(double)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (double)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 145;
 }
 
@@ -33,17 +36,16 @@
     return headerView;
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return section == 0 ? 2 : 10;
 }
 
 // MARK: - Cell Properties
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cellID" forIndexPath:indexPath];
     
     cell.moviePoster.layer.cornerRadius = 10;
@@ -56,7 +58,6 @@
 }
 
 // MARK: - Segue to DetailView
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ListTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -64,4 +65,16 @@
     [self performSegueWithIdentifier:@"detailSegue" sender:cell];
 }
 
+
+//MARK: private functions
+- (void) loadPopularMovies{
+    [network fetchMovies: @("popular") withCompletionHandler: ^(NSArray* movies){
+        self.popular = movies;
+    }];
+}
+- (void) loadNowPlayingMovies{
+    [network fetchMovies: @("now_playing") withCompletionHandler: ^(NSArray* movies){
+        self.popular = movies;
+    }];
+}
 @end
