@@ -27,7 +27,7 @@
     return self;
 }
 
--(void) fetchMovieWithID: (NSString *) movieId withCompletionHandler: (void (^)(NSObject *))completionHandler {
+-(void) fetchMovieWithID: (NSString *) movieId withCompletionHandler: (void (^)(Movie *))completionHandler {
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US", movieId, apiKey]];
     [request setURL: url];
     
