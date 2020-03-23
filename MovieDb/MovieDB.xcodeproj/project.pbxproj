@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60730D1E2429109B0025A79C /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FA97D224226D8E00A087A6 /* DetailsViewController.m */; };
 		60A5D4F524240D0F001970E4 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A5D4F424240D0F001970E4 /* Movie.m */; };
 		60A5D4FB2425662B001970E4 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A5D4FA2425662B001970E4 /* Network.m */; };
 		60A5D4FE24257257001970E4 /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A5D4FD24257257001970E4 /* Parser.m */; };
@@ -232,6 +233,7 @@
 				F28029682422C61200D402F5 /* ListTableViewCell.m in Sources */,
 				60FA979D24213A8300A087A6 /* SceneDelegate.m in Sources */,
 				60A5D4FE24257257001970E4 /* Parser.m in Sources */,
+				60730D1E2429109B0025A79C /* DetailsViewController.m in Sources */,
 				60A5D4FB2425662B001970E4 /* Network.m in Sources */,
 				60A5D4F524240D0F001970E4 /* Movie.m in Sources */,
 			);
