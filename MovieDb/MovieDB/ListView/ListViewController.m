@@ -20,8 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     [self loadPopularMovies];
     [self loadNowPlayingMovies];
+   
 }
 
 // MARK: - TableView Properties
@@ -47,13 +50,23 @@
 // MARK: - Cell Properties
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cellID" forIndexPath:indexPath];
-    
-    cell.moviePoster.layer.cornerRadius = 10;
-    cell.moviePoster.image = [UIImage imageNamed:@"moviePoster"];
-    cell.movieTitle.text = @"isso é um título";
-    cell.movieDescription.text = @"aqui vai a descrição pipipipopopo";
-    cell.movieRate.text = @"9.0";
-    
+    if(indexPath.row < 3){
+        // popular cell
+        Movie* movie = [popular objectAtIndex: indexPath.row];
+        cell.moviePoster.layer.cornerRadius = 10;
+        cell.moviePoster.image = [ UIImage imageWithData:movie.poster];
+        cell.movieTitle.text = movie.title;
+        cell.movieDescription.text = movie.overview;
+        cell.movieRate.text = movie.vote_average;
+    }else{
+        // now_playing cell
+        Movie* movie = [nowPlaying objectAtIndex: indexPath.row - 2];
+        cell.moviePoster.layer.cornerRadius = 10;
+        cell.moviePoster.image = [ UIImage imageWithData:movie.poster];
+        cell.movieTitle.text = movie.title;
+        cell.movieDescription.text = movie.overview;
+        cell.movieRate.text = movie.vote_average;
+    }
     return cell;
 }
 
@@ -61,20 +74,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ListTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     [self performSegueWithIdentifier:@"detailSegue" sender:cell];
 }
-
 
 //MARK: private functions
 - (void) loadPopularMovies{
     [network fetchMovies: @("popular") withCompletionHandler: ^(NSArray* movies){
         self.popular = movies;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+        
+
     }];
 }
 - (void) loadNowPlayingMovies{
     [network fetchMovies: @("now_playing") withCompletionHandler: ^(NSArray* movies){
         self.popular = movies;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
     }];
 }
 @end

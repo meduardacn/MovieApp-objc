@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Network.h"
 
-@interface ListViewController : UITableViewController{
+@interface ListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>{
     Network* network;
     NSArray* popular;
     NSArray* nowPlaying;
