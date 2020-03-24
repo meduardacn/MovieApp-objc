@@ -12,6 +12,13 @@
 
 @interface DetailsViewController ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *cardImage;
+@property (weak, nonatomic) IBOutlet UILabel *movieTitle;
+@property (weak, nonatomic) IBOutlet UILabel *genres;
+@property (weak, nonatomic) IBOutlet UILabel *score;
+@property (weak, nonatomic) IBOutlet UITextView *overviewText;
+@property(nonatomic,retain) Network* network;
+
 @end
 
 @implementation DetailsViewController
@@ -19,6 +26,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.movieTitle.text = movie.title;
+    self.genres.text = movie.genres;
+    self.score.text = [NSString stringWithFormat:@"%@",movie.vote_average];
+    self.overviewText.text = movie.overview;
+    
     self.network = [[Network alloc] init];
     [self getMovieDetails: @(419704)];
 }

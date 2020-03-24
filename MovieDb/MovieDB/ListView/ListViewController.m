@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    network = [[Network alloc] init];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self loadPopularMovies];
@@ -50,25 +51,16 @@
 // MARK: - Cell Properties
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cellID" forIndexPath:indexPath];
-    if(indexPath.row < 3){
-        // popular cell
-        Movie* movie = [popular objectAtIndex: indexPath.row];
-        cell.movie = movie;
-        cell.moviePoster.layer.cornerRadius = 10;
-        cell.moviePoster.image = [ UIImage imageWithData:movie.poster];
-        cell.movieTitle.text = movie.title;
-        cell.movieDescription.text = movie.overview;
-        cell.movieRate.text = movie.vote_average;
-    }else{
-        // now_playing cell
-        Movie* movie = [nowPlaying objectAtIndex: indexPath.row - 2];
-        cell.movie = movie;
-        cell.moviePoster.layer.cornerRadius = 10;
-        cell.moviePoster.image = [ UIImage imageWithData:movie.poster];
-        cell.movieTitle.text = movie.title;
-        cell.movieDescription.text = movie.overview;
-        cell.movieRate.text = movie.vote_average;
-    }
+    Movie* movie = nil;
+    if(indexPath.section == 0) movie = [popular objectAtIndex: indexPath.row];
+    else movie = [nowPlaying objectAtIndex: indexPath.row];
+    cell.movie = movie;
+    cell.moviePoster.layer.cornerRadius = 10;
+    cell.movieTitle.text = movie.title;
+    cell.movieDescription.text = movie.overview;
+    cell.movieRate.text = [NSString stringWithFormat:@"%@",movie.vote_average];\
+//    se tem na cache
+//    cell.moviePoster.image = [ UIImage imageWithData:movie.poster];
     return cell;
 }
 
@@ -81,15 +73,9 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"detailSegue"]){
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow]; 
         DetailsViewController *detViewController = segue.destinationViewController; 
         ListTableViewCell* cell = sender;
         detViewController.movie = cell.movie;
-        detViewController.cardImage.image = [UIImage imageWithData: cell.movie.poster];
-        detViewController.movieTitle.text = cell.movie.title;
-        detViewController.genres.text = cell.movie.genres;
-        detViewController.score.text = cell.movie.vote_average;
-        detViewController.overviewText.text = cell.movie.overview;
     }
 }
 
@@ -100,14 +86,12 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
-        
-        
     }];
 }
 
 - (void) loadNowPlayingMovies{
     [network fetchMovies: @("now_playing") withCompletionHandler: ^(NSArray* movies){
-        self.popular = movies;
+        self.nowPlaying = movies;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
