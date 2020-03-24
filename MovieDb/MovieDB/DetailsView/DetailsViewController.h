@@ -12,8 +12,17 @@
 
 @interface DetailsViewController : UIViewController{
     Network* network;
+    Movie* movie;
 }
+@property (weak, nonatomic) IBOutlet UIImageView *cardImage;
+@property (weak, nonatomic) IBOutlet UILabel *movieTitle;
+@property (weak, nonatomic) IBOutlet UILabel *genres;
+@property (weak, nonatomic) IBOutlet UILabel *score;
+@property (weak, nonatomic) IBOutlet UITextView *overviewText;
+
+
 @property(nonatomic,retain) Network* network;
+@property(nonatomic,retain) Movie* movie;
 
 -(void)fetchMovieDetails: (Movie *)  movie;
 -(void)getMovieDetails: (NSString *)  movieId;

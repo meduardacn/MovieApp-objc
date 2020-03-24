@@ -8,7 +8,7 @@
 
 #import "ListViewController.h"
 #import "ListTableViewCell.h"
-
+#import "DetailsViewController.h"
 
 @interface ListViewController ()
 - (void) loadPopularMovies;
@@ -24,7 +24,7 @@
     self.tableView.delegate = self;
     [self loadPopularMovies];
     [self loadNowPlayingMovies];
-   
+    
 }
 
 // MARK: - TableView Properties
@@ -53,6 +53,7 @@
     if(indexPath.row < 3){
         // popular cell
         Movie* movie = [popular objectAtIndex: indexPath.row];
+        cell.movie = movie;
         cell.moviePoster.layer.cornerRadius = 10;
         cell.moviePoster.image = [ UIImage imageWithData:movie.poster];
         cell.movieTitle.text = movie.title;
@@ -61,6 +62,7 @@
     }else{
         // now_playing cell
         Movie* movie = [nowPlaying objectAtIndex: indexPath.row - 2];
+        cell.movie = movie;
         cell.moviePoster.layer.cornerRadius = 10;
         cell.moviePoster.image = [ UIImage imageWithData:movie.poster];
         cell.movieTitle.text = movie.title;
@@ -77,6 +79,20 @@
     [self performSegueWithIdentifier:@"detailSegue" sender:cell];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"detailSegue"]){
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow]; 
+        DetailsViewController *detViewController = segue.destinationViewController; 
+        ListTableViewCell* cell = sender;
+        detViewController.movie = cell.movie;
+        detViewController.cardImage.image = [UIImage imageWithData: cell.movie.poster];
+        detViewController.movieTitle.text = cell.movie.title;
+        detViewController.genres.text = cell.movie.genres;
+        detViewController.score.text = cell.movie.vote_average;
+        detViewController.overviewText.text = cell.movie.overview;
+    }
+}
+
 //MARK: private functions
 - (void) loadPopularMovies{
     [network fetchMovies: @("popular") withCompletionHandler: ^(NSArray* movies){
@@ -85,9 +101,10 @@
             [self.tableView reloadData];
         });
         
-
+        
     }];
 }
+
 - (void) loadNowPlayingMovies{
     [network fetchMovies: @("now_playing") withCompletionHandler: ^(NSArray* movies){
         self.popular = movies;

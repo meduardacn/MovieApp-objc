@@ -9,7 +9,7 @@
 #import "ListTableViewCell.h"
 
 @implementation ListTableViewCell
-
+@synthesize movie;
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

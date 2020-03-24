@@ -11,16 +11,11 @@
 #import "Movie.h"
 
 @interface DetailsViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *cardImage;
-@property (weak, nonatomic) IBOutlet UILabel *movieTitle;
-@property (weak, nonatomic) IBOutlet UILabel *category;
-@property (weak, nonatomic) IBOutlet UILabel *score;
-@property (weak, nonatomic) IBOutlet UITextView *overviewText;
 
 @end
 
 @implementation DetailsViewController
-@synthesize network;
+@synthesize network, movie;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,7 +28,7 @@
         NSLog(@"%@", movie.title);
         dispatch_async(dispatch_get_main_queue(), ^{
             self.movieTitle.text = movie.title;
-            self.category.text = movie.genres;
+            self.genres.text = movie.genres;
             self.score.text = [NSString stringWithFormat:@"%@",movie.vote_average];
             self.overviewText.text = movie.overview;
         });
@@ -45,7 +40,7 @@
     [network fetchMovieWithID: movieId withCompletionHandler: ^(Movie* movie){
         NSLog(@"%@", movie.title);
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.category.text = movie.genres;
+            self.genres.text = movie.genres;
         });
     }];
 }

@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Movie.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ListTableViewCell : UITableViewCell
+@interface ListTableViewCell : UITableViewCell{
+    Movie* movie;
+}
 
+@property(nonatomic,retain) Movie* movie;
 // MARK: - Cell Outlets
-
 @property (weak, nonatomic) IBOutlet UIImageView *moviePoster;
 @property (weak, nonatomic) IBOutlet UILabel *movieTitle;
 @property (weak, nonatomic) IBOutlet UILabel *movieDescription;
