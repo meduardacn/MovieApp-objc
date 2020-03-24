@@ -27,7 +27,7 @@
 
 - (NSArray *) parseMoviesWithJson:(NSDictionary *)json{
     NSMutableArray *array = @[].mutableCopy;
-    for(NSDictionary *dictionary in json){
+    for(NSDictionary *dictionary in [json objectForKey:@"results"]){
         Movie *movie = [self parseMovie: dictionary];
         [array addObject:movie];
     }

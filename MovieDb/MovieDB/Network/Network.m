@@ -56,11 +56,11 @@
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
         NSArray *array = [self->parser parseMoviesWithJson: json];
-        for(Movie* m in array){
-            [self fetchPoster: m.poster_path withCompletionHandler: ^(NSData* poster){
-                m.poster = poster;
-            }];
-        }
+//        for(Movie* m in array){
+//            [self fetchPoster: m.poster_path withCompletionHandler: ^(NSData* poster){
+//                m.poster = poster;
+//            }];
+//        }
         completionHandler(array);
     }] resume];
 }
@@ -88,6 +88,7 @@
         NSURLResponse * _Nullable response,
         NSError * _Nullable error) {
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
         Movie *movie = [[Movie alloc] init];
         movie = [self->parser parseDetailsFrom: movie withJson:json];
         completionHandler(movie);

@@ -10,7 +10,7 @@
         <!--Details-->
         <scene sceneID="vwP-rZ-WKY">
             <objects>
-                <viewController title="Details" id="2X3-Tn-cCV" customClass="DetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailView" title="Details" id="2X3-Tn-cCV" customClass="DetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yb6-yb-Nmt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,9 +61,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="vxU-yu-Ufh">
-                                <rect key="frame" x="6" y="99" width="13" height="22"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdN-WM-De7">
                                 <rect key="frame" x="153.5" y="99" width="107" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -78,7 +75,6 @@
                             <constraint firstItem="QcL-is-Hzu" firstAttribute="bottom" secondItem="Qzj-RJ-yTE" secondAttribute="bottom" constant="40" id="4rx-ud-rCI"/>
                             <constraint firstItem="Xw8-Ub-pre" firstAttribute="top" secondItem="dEM-aW-cKY" secondAttribute="bottom" constant="13" id="6Ax-Gc-Mgg"/>
                             <constraint firstItem="Qzj-RJ-yTE" firstAttribute="top" secondItem="czH-xP-9gC" secondAttribute="bottom" constant="12" id="6Xv-Di-JvL"/>
-                            <constraint firstItem="vxU-yu-Ufh" firstAttribute="leading" secondItem="QcL-is-Hzu" secondAttribute="leading" constant="6" id="7eE-Vw-xF0"/>
                             <constraint firstItem="dEM-aW-cKY" firstAttribute="top" secondItem="d7W-ap-r10" secondAttribute="bottom" constant="7" id="DPS-lA-PCS"/>
                             <constraint firstItem="TdN-WM-De7" firstAttribute="top" secondItem="QcL-is-Hzu" secondAttribute="top" constant="55" id="HPW-f5-lNd"/>
                             <constraint firstItem="QcL-is-Hzu" firstAttribute="trailing" secondItem="czH-xP-9gC" secondAttribute="trailing" constant="90" id="InL-VH-mFh"/>
@@ -94,17 +90,16 @@
                             <constraint firstItem="dEM-aW-cKY" firstAttribute="leading" secondItem="QUL-60-p37" secondAttribute="trailing" constant="14" id="e05-hF-xOT"/>
                             <constraint firstItem="mSz-hC-cHB" firstAttribute="leading" secondItem="QUL-60-p37" secondAttribute="trailing" constant="14" id="kmU-OQ-tHk"/>
                             <constraint firstItem="QUL-60-p37" firstAttribute="top" secondItem="QcL-is-Hzu" secondAttribute="top" constant="106" id="lyC-NB-44z"/>
-                            <constraint firstItem="vxU-yu-Ufh" firstAttribute="top" secondItem="QcL-is-Hzu" secondAttribute="top" constant="55" id="q7V-4R-LZj"/>
                             <constraint firstItem="czH-xP-9gC" firstAttribute="leading" secondItem="QcL-is-Hzu" secondAttribute="leading" constant="21" id="umn-ln-SI3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QcL-is-Hzu"/>
                     </view>
                     <connections>
-                        <outlet property="cardImage" destination="QUL-60-p37" id="H16-hA-ioA"/>
-                        <outlet property="category" destination="dEM-aW-cKY" id="BS8-GZ-d4j"/>
-                        <outlet property="movieTitle" destination="d7W-ap-r10" id="fey-do-iGS"/>
-                        <outlet property="overviewText" destination="Qzj-RJ-yTE" id="ccs-sd-Ilq"/>
-                        <outlet property="score" destination="Xw8-Ub-pre" id="GHc-eu-kmd"/>
+                        <outlet property="cardImage" destination="QUL-60-p37" id="TUB-S6-6SM"/>
+                        <outlet property="genres" destination="dEM-aW-cKY" id="7pR-we-R9d"/>
+                        <outlet property="movieTitle" destination="d7W-ap-r10" id="Ns1-dc-Iif"/>
+                        <outlet property="overviewText" destination="Qzj-RJ-yTE" id="mNH-ZI-qo9"/>
+                        <outlet property="score" destination="Xw8-Ub-pre" id="GZ6-gG-voH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7oN-Ep-lf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -113,7 +108,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon" width="13" height="22"/>
         <image name="Star Icon" width="34" height="33"/>
         <image name="lion" width="128" height="194"/>
     </resources>
