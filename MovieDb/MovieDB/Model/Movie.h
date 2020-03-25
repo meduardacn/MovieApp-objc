@@ -9,22 +9,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Movie : NSObject {
-    NSString* title;
-    NSString* genres;
-    NSString* overview;
-    NSString* vote_average;
-    NSString* movieID;
-    NSData* poster;
-    NSString* poster_path;
-}
+@interface Movie : NSObject
+// AMW: https://medium.com/@abhishek1nacc/atomic-nonatomic-retain-assign-copy-582b79d31568
 
-@property(nonatomic,retain) NSString* title;
-@property(nonatomic,retain) NSString* genres;
-@property(nonatomic,retain) NSString* overview;
-@property(nonatomic,retain) NSString* vote_average;
-@property(nonatomic,retain) NSString* movieID;
-@property(nonatomic,retain) NSString* poster_path;
-@property(nonatomic,retain) NSData* poster;
+@property(nonatomic,strong) NSString* title;
+@property(nonatomic,strong) NSString* genres;
+@property(nonatomic,strong) NSString* overview;
+@property(nonatomic,strong) NSString* vote_average;
+@property(nonatomic,strong) NSString* movieID;
+@property(nonatomic,strong) NSString* poster_path;
 
 @end

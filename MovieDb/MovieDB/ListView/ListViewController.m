@@ -10,17 +10,19 @@
 #import "ListTableViewCell.h"
 #import "DetailsViewController.h"
 
-@interface ListViewController ()
+@interface ListViewController (){
+    NSArray* popular;
+    NSArray* nowPlaying;
+}
+
 - (void) loadPopularMovies;
 - (void) loadNowPlayingMovies;
 @end
 
 @implementation ListViewController
-@synthesize network, popular, nowPlaying;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    network = [[Network alloc] init];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self loadPopularMovies];
@@ -73,7 +75,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"detailSegue"]){
-        DetailsViewController *detViewController = segue.destinationViewController; 
+        DetailsViewController *detViewController = segue.destinationViewController;
         ListTableViewCell* cell = sender;
         detViewController.movie = cell.movie;
     }
@@ -81,8 +83,8 @@
 
 //MARK: private functions
 - (void) loadPopularMovies{
-    [network fetchMovies: @("popular") withCompletionHandler: ^(NSArray* movies){
-        self.popular = movies;
+    [Network fetchMovies: @("popular") withCompletionHandler: ^(NSArray* movies){
+        self->popular = movies;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
@@ -90,8 +92,8 @@
 }
 
 - (void) loadNowPlayingMovies{
-    [network fetchMovies: @("now_playing") withCompletionHandler: ^(NSArray* movies){
-        self.nowPlaying = movies;
+    [Network fetchMovies: @("now_playing") withCompletionHandler: ^(NSArray* movies){
+        self->nowPlaying = movies;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
