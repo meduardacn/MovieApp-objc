@@ -10,8 +10,7 @@
 #import "Network.h"
 
 
-@interface DetailsViewController : UIViewController{
-}
+@interface DetailsViewController : UIViewController
 
 @property(nonatomic,retain) Movie* movie;
 
