@@ -10,7 +10,7 @@
 #import "Network.h"
 #import "Movie.h"
 
-#define APIKEY @"e33d6d132f3f10c719d71ad8b3149066";
+#define APIKEY @"e33d6d132f3f10c719d71ad8b3149066"
 
 //NSString* apiKey = @"e33d6d132f3f10c719d71ad8b3149066"; CONST
 @interface Network ()
@@ -19,12 +19,11 @@
 
 @implementation Network
 
-static NSString * const apiKey = @"e33d6d132f3f10c719d71ad8b3149066";
 
 //MARK: Function to call from DetailsViewController
 +(void) fetchGenresWith: (NSString *) movieID withCompletionHandler: (void (^)(NSArray *))completionHandler {
     NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US", movieID, apiKey ]];
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US", movieID, APIKEY ]];
     
     [request setHTTPMethod:@"GET"];
     [request setURL: url];
@@ -40,11 +39,11 @@ static NSString * const apiKey = @"e33d6d132f3f10c719d71ad8b3149066";
 }
 
 //MARK: Function to call in ListViewController passing "now_playing" or "popular"
--(void) fetchMovies:(NSString *) type  withCompletionHandler: (void (^)(NSArray *))completionHandler{
++ (void) fetchMovies:(NSString *) type  withCompletionHandler: (void (^)(NSArray *))completionHandler{
     NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
     
     
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US&page=1", type, apiKey]];
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US&page=1", type, APIKEY]];
     
     [request setHTTPMethod:@"GET"];
     [request setURL: url];
