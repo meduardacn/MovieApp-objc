@@ -15,6 +15,13 @@
 - (void) loadNowPlayingMovies;
 @end
 
+// Enum  TableView Sections
+typedef NS_ENUM(NSInteger, TABLE_SECTION_ITEMS){
+    TABLE_SECTION_Popular,
+    TABLE_SECTION_Playing,
+    TABLE_SECTION_Count
+};
+
 @implementation ListViewController
 @synthesize network, popular, nowPlaying;
 
@@ -25,7 +32,6 @@
     self.tableView.delegate = self;
     [self loadPopularMovies];
     [self loadNowPlayingMovies];
-    
 }
 
 // MARK: - TableView Properties
@@ -33,15 +39,23 @@
     return 145;
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+- (NSString *)tableSectionName:(TABLE_SECTION_ITEMS)item {
+    switch (item) {
+        case TABLE_SECTION_Popular: return @"Popular Movies";
+        case TABLE_SECTION_Playing: return @"Now Playing";
+        case TABLE_SECTION_Count: return nil;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UITableViewHeaderFooterView *headerView = UITableViewHeaderFooterView.new;
-    headerView.textLabel.text = section == 0 ? @"Popular Movies" : @"Now Playing";
+    headerView.textLabel.text = [self tableSectionName:section];
     headerView.tintColor = UIColor .whiteColor;
     return headerView;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return TABLE_SECTION_Count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -52,6 +66,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cellID" forIndexPath:indexPath];
     Movie* movie = nil;
+    
     if(indexPath.section == 0) movie = [popular objectAtIndex: indexPath.row];
     else movie = [nowPlaying objectAtIndex: indexPath.row];
     cell.movie = movie;
@@ -73,7 +88,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"detailSegue"]){
-        DetailsViewController *detViewController = segue.destinationViewController; 
+        DetailsViewController *detViewController = segue.destinationViewController;
         ListTableViewCell* cell = sender;
         detViewController.movie = cell.movie;
     }
