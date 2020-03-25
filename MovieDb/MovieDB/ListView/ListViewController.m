@@ -81,20 +81,20 @@
 
 //MARK: private functions
 - (void) loadPopularMovies{
-    [network fetchMovies: @("popular") withCompletionHandler: ^(NSArray* movies){
-        self.popular = movies;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
+//    [network fetchMovies: @("popular") withCompletionHandler: ^(NSArray* movies){
+//        self.popular = movies;
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.tableView reloadData];
+//        });
+//    }];
 }
 
 - (void) loadNowPlayingMovies{
-    [network fetchMovies: @("now_playing") withCompletionHandler: ^(NSArray* movies){
-        self.nowPlaying = movies;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
+//    [network fetchMovies: @("now_playing") withCompletionHandler: ^(NSArray* movies){
+//        self.nowPlaying = movies;
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.tableView reloadData];
+//        });
+//    }];
 }
 @end

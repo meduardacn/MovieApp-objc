@@ -10,12 +10,12 @@
 #import "Parser.h"
 #import "Movie.h"
 @interface Parser()
-- (Movie *) parseMovie:(NSDictionary *)json;
++ (Movie *) parseMovie:(NSDictionary *)json;
 @end
 
 @implementation Parser
 //MARK: public functions
-- (NSArray *) parseGenreswithJson:(NSDictionary *)json{
++ (NSArray *) parseGenreswithJson:(NSDictionary *)json{
     NSMutableArray *genres = @[].mutableCopy;
     for (NSDictionary *dictionary in [json objectForKey:@"genres"]) {
         [genres addObject: [dictionary valueForKey:@"name"] ];
@@ -23,17 +23,18 @@
     return genres;
 }
 
-- (NSArray *) parseMoviesWithJson:(NSDictionary *)json{
++ (NSArray *) parseMoviesWithJson:(NSDictionary *)json{
+    
     NSMutableArray *array = @[].mutableCopy;
     for(NSDictionary *dictionary in [json objectForKey:@"results"]){
-        Movie *movie = [self parseMovie: dictionary];
+        Movie *movie = [Parser parseMovie: dictionary];
         [array addObject:movie];
     }
     return array;
 }
 
 //MARK: private functions
-- (Movie *) parseMovie:(NSDictionary *)json {
++ (Movie *) parseMovie:(NSDictionary *)json {
     Movie *movie = [[Movie alloc] init];
     movie.title = [json objectForKey:@"title"];
     movie.overview = [json objectForKey:@"overview"];
