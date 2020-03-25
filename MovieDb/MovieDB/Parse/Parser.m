@@ -15,14 +15,12 @@
 
 @implementation Parser
 //MARK: public functions
-- (Movie *) parseDetailsFrom: (Movie *) movie withJson:(NSDictionary *)json {
-    NSString* allGenres = @"| ";
+- (NSArray *) parseGenreswithJson:(NSDictionary *)json{
+    NSMutableArray *genres = @[].mutableCopy;
     for (NSDictionary *dictionary in [json objectForKey:@"genres"]) {
-        allGenres = [allGenres stringByAppendingString: [dictionary valueForKey:@"name"] ];
-        allGenres = [allGenres stringByAppendingString: @" | " ];
+        [genres addObject: [dictionary valueForKey:@"name"] ];
     }
-    movie.genres = allGenres;
-    return movie;
+    return genres;
 }
 
 - (NSArray *) parseMoviesWithJson:(NSDictionary *)json{
