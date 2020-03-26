@@ -12,7 +12,6 @@
 
 #define APIKEY @"e33d6d132f3f10c719d71ad8b3149066"
 
-//NSString* apiKey = @"e33d6d132f3f10c719d71ad8b3149066"; CONST
 @interface Network ()
 
 @end
@@ -32,6 +31,11 @@
       ^(NSData * _Nullable data,
         NSURLResponse * _Nullable response,
         NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Request error fetch genres");
+//            NSLog(@"Request error fetch genres: %@", error);
+            return;
+        }
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         NSArray *genres = [Parser parseGenreswithJson:json];
         completionHandler(genres);
@@ -39,11 +43,10 @@
 }
 
 //MARK: Function to call in ListViewController passing "now_playing" or "popular"
-+ (void) fetchMovies:(NSString *) type  withCompletionHandler: (void (^)(NSArray *))completionHandler{
++ (void) fetchMovies:(NSString *) type onPage:(int) page withCompletionHandler: (void (^)(NSArray *))completionHandler{
     NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
     
-    
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US&page=1", type, APIKEY]];
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US&page=%@", type, APIKEY, [NSString stringWithFormat:@"%d",page] ]];
     
     [request setHTTPMethod:@"GET"];
     [request setURL: url];
@@ -52,6 +55,11 @@
       ^(NSData * _Nullable data,
         NSURLResponse * _Nullable response,
         NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Request error on page: %d ---",page);
+//            NSLog(@"Request error on page: %d --- %@",page, error);
+            return;
+        }
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         NSArray *array = [Parser parseMoviesWithJson: json];
         completionHandler(array);
@@ -66,6 +74,11 @@
     [request setURL: url];
         
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data,NSURLResponse * _Nullable response,NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Request error fetch poster");
+//            NSLog(@"Request error fetch poster: %@", error);
+            return;
+        }
         completionHandler(data);
     }] resume];
 }
