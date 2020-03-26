@@ -12,5 +12,5 @@
 @interface Network : NSObject
 + (void) fetchGenresWith: (NSString *) movieID withCompletionHandler: (void (^)(NSArray *))completionHandler;
 + (void) fetchMovies:(NSString *) movieId  withCompletionHandler: (void (^)(NSArray *))completionHandler;
-+ (void) fetchPoster: (NSString *) poster_path withCompletionHandler: (void (^)(NSData *))completionHandler;
++ (void) fetchPosterWithPath: (NSString *) poster_path withCompletionHandler: (void (^)(NSData *))completionHandler;
 @end

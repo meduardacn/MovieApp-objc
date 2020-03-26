@@ -59,7 +59,7 @@
 }
 
 //MARK: private function
-+(void) fetchPoster: (NSString *) poster_path withCompletionHandler: (void (^)(NSData *))completionHandler{
++(void) fetchPosterWithPath: (NSString *) poster_path withCompletionHandler: (void (^)(NSData *))completionHandler{
     NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@",poster_path]];
     [request setHTTPMethod:@"GET"];

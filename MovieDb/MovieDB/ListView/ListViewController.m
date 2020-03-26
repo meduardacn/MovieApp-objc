@@ -13,6 +13,7 @@
 @interface ListViewController (){
     NSArray* popular;
     NSArray* nowPlaying;
+    NSCache* cache;
 }
 
 - (void) loadPopularMovies;
@@ -25,6 +26,7 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    cache = [[NSCache alloc] init];
     [self loadPopularMovies];
     [self loadNowPlayingMovies];
     
@@ -61,8 +63,15 @@
     cell.movieTitle.text = movie.title;
     cell.movieDescription.text = movie.overview;
     cell.movieRate.text = [NSString stringWithFormat:@"%@",movie.vote_average];\
-//    se tem na cache
-//    cell.moviePoster.image = [ UIImage imageWithData:movie.poster];
+
+    __block NSData* posterData = [cache objectForKey:movie.poster_path];
+    if(!posterData){
+        [Network fetchPosterWithPath:movie.poster_path withCompletionHandler: ^(NSData* poster){
+            [self->cache setObject:poster forKey:movie.poster_path];
+            posterData = poster;
+        }];
+    }
+    cell.moviePoster.image = [ UIImage imageWithData:posterData];
     return cell;
 }
 
@@ -78,6 +87,7 @@
         DetailsViewController *detViewController = segue.destinationViewController;
         ListTableViewCell* cell = sender;
         detViewController.movie = cell.movie;
+        detViewController.poster = cell.moviePoster.image;
     }
 }
 
