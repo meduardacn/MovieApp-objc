@@ -68,10 +68,12 @@
     if(!posterData){
         [Network fetchPosterWithPath:movie.poster_path withCompletionHandler: ^(NSData* poster){
             [self->cache setObject:poster forKey:movie.poster_path];
-            posterData = poster;
+            cell.moviePoster.image = [ UIImage imageWithData:poster];
         }];
+    }else{
+        cell.moviePoster.image = [ UIImage imageWithData:posterData];
     }
-    cell.moviePoster.image = [ UIImage imageWithData:posterData];
+    
     return cell;
 }
 
