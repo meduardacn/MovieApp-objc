@@ -10,9 +10,15 @@
 #import "ListTableViewCell.h"
 #import "DetailsViewController.h"
 
-@interface ListViewController ()
-- (void) loadPopularMovies;
-- (void) loadNowPlayingMovies;
+@interface ListViewController (){
+    NSMutableArray* popular;
+    NSMutableArray* nowPlaying;
+    NSCache<NSString*, NSData*> *cache;
+    int page;
+}
+- (void) loadPopularMovies:(int)page;
+- (void) loadNowPlayingMovies:(int)page;
+
 @end
 
 // Enum  TableView Sections
@@ -23,15 +29,18 @@ typedef NS_ENUM(NSInteger, TABLE_SECTION_ITEMS){
 };
 
 @implementation ListViewController
-@synthesize network, popular, nowPlaying;
+bool hasMoreMovies = NO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    network = [[Network alloc] init];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    [self loadPopularMovies];
-    [self loadNowPlayingMovies];
+    page = 1;
+    cache = [[NSCache alloc] init];
+    popular = [[NSMutableArray alloc]init ];
+    nowPlaying = [[NSMutableArray alloc]init ];
+    [self loadPopularMovies:page];
+    [self loadNowPlayingMovies:page];
 }
 
 // MARK: - TableView Properties
@@ -59,14 +68,14 @@ typedef NS_ENUM(NSInteger, TABLE_SECTION_ITEMS){
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return section == 0 ? 2 : 10;
+    return section == 0 ? 2 : nowPlaying.count;
 }
 
 // MARK: - Cell Properties
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cellID" forIndexPath:indexPath];
     Movie* movie = nil;
-    
+    if(popular.count == 0 || nowPlaying.count == 0) return cell;
     if(indexPath.section == 0) movie = [popular objectAtIndex: indexPath.row];
     else movie = [nowPlaying objectAtIndex: indexPath.row];
     cell.movie = movie;
@@ -74,8 +83,18 @@ typedef NS_ENUM(NSInteger, TABLE_SECTION_ITEMS){
     cell.movieTitle.text = movie.title;
     cell.movieDescription.text = movie.overview;
     cell.movieRate.text = [NSString stringWithFormat:@"%@",movie.vote_average];\
-//    se tem na cache
-//    cell.moviePoster.image = [ UIImage imageWithData:movie.poster];
+
+    __block NSData* posterData = [cache objectForKey:movie.poster_path];
+    if(!posterData){
+        [Network fetchPosterWithPath:movie.poster_path withCompletionHandler: ^(NSData* poster){
+            [self->cache setObject:poster forKey:movie.poster_path];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.moviePoster.image = [ UIImage imageWithData:poster];
+            });
+        }];
+    }else{
+        cell.moviePoster.image = [ UIImage imageWithData:posterData];
+    }
     return cell;
 }
 
@@ -91,25 +110,37 @@ typedef NS_ENUM(NSInteger, TABLE_SECTION_ITEMS){
         DetailsViewController *detViewController = segue.destinationViewController;
         ListTableViewCell* cell = sender;
         detViewController.movie = cell.movie;
+        detViewController.poster = cell.moviePoster.image;
     }
 }
 
 //MARK: private functions
-- (void) loadPopularMovies{
-    [network fetchMovies: @("popular") withCompletionHandler: ^(NSArray* movies){
-        self.popular = movies;
+- (void) loadPopularMovies:(int)page{
+    [Network fetchMovies:@("popular") onPage: page withCompletionHandler: ^(NSArray* movies){
+        [self->popular addObjectsFromArray:movies];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     }];
 }
 
-- (void) loadNowPlayingMovies{
-    [network fetchMovies: @("now_playing") withCompletionHandler: ^(NSArray* movies){
-        self.nowPlaying = movies;
+- (void) loadNowPlayingMovies: (int)page{
+    [Network fetchMovies: @("now_playing") onPage: page withCompletionHandler: ^(NSArray* movies){
+        [self->nowPlaying addObjectsFromArray: movies];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     }];
 }
+
+//MARK: Pagination
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(nowPlaying.count>1){
+        if(indexPath.row == nowPlaying.count-1){
+            page++;
+            [self loadNowPlayingMovies:page];
+        }
+    }
+}
+
 @end

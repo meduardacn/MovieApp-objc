@@ -10,88 +10,76 @@
 #import "Network.h"
 #import "Movie.h"
 
+#define APIKEY @"e33d6d132f3f10c719d71ad8b3149066"
+
 @interface Network ()
 
--(void) fetchPoster: (NSString *) poster_path withCompletionHandler: (void (^)(NSData *))completionHandler;
 @end
 
 @implementation Network
-@synthesize apiKey, request, parser;
 
-- (id)init{
-    self = [super init];
-    if(self){
-        self.apiKey = @"e33d6d132f3f10c719d71ad8b3149066";
-        self.request = [[NSMutableURLRequest alloc] init];
-        [request setHTTPMethod:@"GET"];
-        self.parser = [[Parser alloc] init];
-    }
-    return self;
-}
 
-//MARK: Function to call in DetailsViewController passing movie
--(void) fetchMovieDetails: (Movie *) movie withCompletionHandler: (void (^)(Movie *))completionHandler {
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US", movie.movieID, apiKey]];
+//MARK: Function to call from DetailsViewController
++(void) fetchGenresWith: (NSString *) movieID withCompletionHandler: (void (^)(NSArray *))completionHandler {
+    NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US", movieID, APIKEY ]];
+    
+    [request setHTTPMethod:@"GET"];
     [request setURL: url];
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
       ^(NSData * _Nullable data,
         NSURLResponse * _Nullable response,
         NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Request error fetch genres");
+//            NSLog(@"Request error fetch genres: %@", error);
+            return;
+        }
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        Movie *newMovie = [self->parser parseDetailsFrom: movie withJson:json];
-        completionHandler(newMovie);
+        NSArray *genres = [Parser parseGenreswithJson:json];
+        completionHandler(genres);
     }] resume];
 }
 
 //MARK: Function to call in ListViewController passing "now_playing" or "popular"
--(void) fetchMovies:(NSString *) type  withCompletionHandler: (void (^)(NSArray *))completionHandler{
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US&page=1", type, apiKey]];
++ (void) fetchMovies:(NSString *) type onPage:(int) page withCompletionHandler: (void (^)(NSArray *))completionHandler{
+    NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
+    
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US&page=%@", type, APIKEY, [NSString stringWithFormat:@"%d",page] ]];
+    
+    [request setHTTPMethod:@"GET"];
     [request setURL: url];
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
       ^(NSData * _Nullable data,
         NSURLResponse * _Nullable response,
         NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Request error on page: %d ---",page);
+//            NSLog(@"Request error on page: %d --- %@",page, error);
+            return;
+        }
         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        
-        NSArray *array = [self->parser parseMoviesWithJson: json];
-//        for(Movie* m in array){
-//            [self fetchPoster: m.poster_path withCompletionHandler: ^(NSData* poster){
-//                m.poster = poster;
-//            }];
-//        }
+        NSArray *array = [Parser parseMoviesWithJson: json];
         completionHandler(array);
     }] resume];
 }
 
 //MARK: private function
--(void) fetchPoster: (NSString *) poster_path withCompletionHandler: (void (^)(NSData *))completionHandler{
-      NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@",poster_path]];
-        [request setURL: url];
-        
-        [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
-          ^(NSData * _Nullable data,
-            NSURLResponse * _Nullable response,
-            NSError * _Nullable error) {
-            completionHandler(data);
-        }] resume];
-    }
-
-//MARK: function for testing
--(void) fetchMovieWithID: (NSString *) movieId withCompletionHandler: (void (^)(Movie *))completionHandler {
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@&language=en-US", movieId, apiKey]];
++(void) fetchPosterWithPath: (NSString *) poster_path withCompletionHandler: (void (^)(NSData *))completionHandler{
+    NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@",poster_path]];
+    [request setHTTPMethod:@"GET"];
     [request setURL: url];
-
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
-      ^(NSData * _Nullable data,
-        NSURLResponse * _Nullable response,
-        NSError * _Nullable error) {
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
-        Movie *movie = [[Movie alloc] init];
-        movie = [self->parser parseDetailsFrom: movie withJson:json];
-        completionHandler(movie);
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data,NSURLResponse * _Nullable response,NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Request error fetch poster");
+//            NSLog(@"Request error fetch poster: %@", error);
+            return;
+        }
+        completionHandler(data);
     }] resume];
 }
 

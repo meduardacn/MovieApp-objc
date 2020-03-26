@@ -9,22 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "Parser.h"
 
-@interface Network : NSObject {
-    NSString* apiKey;
-    NSMutableURLRequest* request;
-    Parser* parser;
-}
-
-@property(nonatomic,retain) NSString* apiKey;
-@property(nonatomic,retain) NSMutableURLRequest* request;
-@property(nonatomic,retain) Parser* parser;
-
--(instancetype)init;
-
--(void) fetchMovieDetails: (Movie *) movie withCompletionHandler: (void (^)(Movie *))completionHandler;
--(void) fetchMovies:(NSString *) movieId  withCompletionHandler: (void (^)(NSArray *))completionHandler;
-
-
-//MARK: function for testing
--(void) fetchMovieWithID: (NSString *) movieId withCompletionHandler: (void (^)(Movie *))completionHandler;
+@interface Network : NSObject
++ (void) fetchGenresWith: (NSString *) movieID withCompletionHandler: (void (^)(NSArray *))completionHandler;
++ (void) fetchMovies:(NSString *) type onPage:(int) page withCompletionHandler: (void (^)(NSArray *))completionHandler;
++ (void) fetchPosterWithPath: (NSString *) poster_path withCompletionHandler: (void (^)(NSData *))completionHandler;
 @end

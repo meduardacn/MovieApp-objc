@@ -9,15 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Network.h"
 
-@interface ListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>{
-    Network* network;
-    NSArray* popular;
-    NSArray* nowPlaying;
-}
-
-@property(nonatomic,retain) Network* network;
-@property(nonatomic,retain) NSArray* popular;
-@property(nonatomic,retain) NSArray* nowPlaying;
-
+@interface ListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 @end
 

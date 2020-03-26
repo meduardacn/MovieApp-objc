@@ -10,9 +10,8 @@
 #import "Network.h"
 
 
-@interface DetailsViewController : UIViewController{
-}
-
-@property(nonatomic,retain) Movie* movie;
+@interface DetailsViewController : UIViewController
+@property(nonatomic,strong) UIImage* poster;
+@property(nonatomic,strong) Movie* movie;
 
 @end
