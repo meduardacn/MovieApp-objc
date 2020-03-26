@@ -87,6 +87,7 @@
         DetailsViewController *detViewController = segue.destinationViewController;
         ListTableViewCell* cell = sender;
         detViewController.movie = cell.movie;
+        detViewController.poster = cell.moviePoster.image;
     }
 }
 

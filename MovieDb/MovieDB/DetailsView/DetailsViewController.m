@@ -22,7 +22,7 @@
 @end
 
 @implementation DetailsViewController
-@synthesize movie;
+@synthesize movie, poster;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +30,7 @@
     self.genres.text = movie.genres;
     self.score.text = [NSString stringWithFormat:@"%@",movie.vote_average];
     self.overviewText.text = movie.overview;
+    self.cardImage.image = poster;
     
     [self fetchMovieDetails];
 }
