@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Network.h"
 
-@interface ListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
 @end
 

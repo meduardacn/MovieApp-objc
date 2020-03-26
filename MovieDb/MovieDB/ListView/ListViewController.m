@@ -9,12 +9,16 @@
 #import "ListViewController.h"
 #import "ListTableViewCell.h"
 #import "DetailsViewController.h"
+#import "Network.h"
 
 @interface ListViewController (){
     NSMutableArray* popular;
     NSMutableArray* nowPlaying;
     NSCache<NSString*, NSData*> *cache;
     int page;
+    
+    NSMutableArray* filteredMovies;
+    BOOL isFiltered;
 }
 - (void) loadPopularMovies:(int)page;
 - (void) loadNowPlayingMovies:(int)page;
@@ -41,6 +45,28 @@ bool hasMoreMovies = NO;
     nowPlaying = [[NSMutableArray alloc]init ];
     [self loadPopularMovies:page];
     [self loadNowPlayingMovies:page];
+    
+    isFiltered = false;
+    self.searchBar.delegate = self;
+}
+
+// MARK: - SearchBar
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if (searchText == 0){
+        isFiltered = false;
+    } else {
+        isFiltered = true;
+        filteredMovies = [[NSMutableArray alloc]init];
+        
+        for(NSString *movie in nowPlaying){
+            NSRange nameRange = [movie rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            if(nameRange.location != NSNotFound){
+                [filteredMovies addObject:movie];
+            }
+        }
+    }
+    [self.tableView reloadData];
 }
 
 // MARK: - TableView Properties
@@ -64,10 +90,17 @@ bool hasMoreMovies = NO;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return TABLE_SECTION_Count;
+    if(isFiltered){
+        return 1;
+    } else {
+        return TABLE_SECTION_Count;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(isFiltered){
+        return section == 0 ? 0 : filteredMovies.count;
+    }
     return section == 0 ? 2 : nowPlaying.count;
 }
 
@@ -78,7 +111,13 @@ bool hasMoreMovies = NO;
     if(popular.count == 0 || nowPlaying.count == 0) return cell;
     if(indexPath.section == 0) movie = [popular objectAtIndex: indexPath.row];
     else movie = [nowPlaying objectAtIndex: indexPath.row];
-    cell.movie = movie;
+    
+    if(isFiltered){
+        cell.movie = filteredMovies[indexPath.row];
+    } else {
+         cell.movie = movie;
+    }
+   
     cell.moviePoster.layer.cornerRadius = 10;
     cell.movieTitle.text = movie.title;
     cell.movieDescription.text = movie.overview;
