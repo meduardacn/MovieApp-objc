@@ -21,6 +21,13 @@
 
 @end
 
+// Enum  TableView Sections
+typedef NS_ENUM(NSInteger, TABLE_SECTION_ITEMS){
+    TABLE_SECTION_Popular,
+    TABLE_SECTION_Playing,
+    TABLE_SECTION_Count
+};
+
 @implementation ListViewController
 bool hasMoreMovies = NO;
 
@@ -41,15 +48,23 @@ bool hasMoreMovies = NO;
     return 145;
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+- (NSString *)tableSectionName:(TABLE_SECTION_ITEMS)item {
+    switch (item) {
+        case TABLE_SECTION_Popular: return @"Popular Movies";
+        case TABLE_SECTION_Playing: return @"Now Playing";
+        case TABLE_SECTION_Count: return nil;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UITableViewHeaderFooterView *headerView = UITableViewHeaderFooterView.new;
-    headerView.textLabel.text = section == 0 ? @"Popular Movies" : @"Now Playing";
+    headerView.textLabel.text = [self tableSectionName:section];
     headerView.tintColor = UIColor .whiteColor;
     return headerView;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return TABLE_SECTION_Count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

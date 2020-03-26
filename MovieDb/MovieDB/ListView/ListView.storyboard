@@ -10,10 +10,9 @@
         <scene sceneID="toF-yJ-Vb5">
             <objects>
                 <tableViewController id="118-oZ-TqP" customClass="ListViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8f1-ic-IQ8">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8f1-ic-IQ8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="e2r-BA-MoS">
@@ -55,17 +54,17 @@
                                                 <constraint firstAttribute="width" constant="79" id="fRV-8c-EMC"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-1o-C4t">
-                                            <rect key="frame" x="104" y="26" width="74" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-1o-C4t">
+                                            <rect key="frame" x="104" y="26" width="275" height="34"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="17" id="4E0-kn-jL6"/>
+                                                <constraint firstAttribute="height" constant="34" id="4E0-kn-jL6"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phq-2s-HQC">
-                                            <rect key="frame" x="104" y="53" width="305" height="50"/>
+                                            <rect key="frame" x="104" y="65" width="305" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="Zjt-uy-W3H"/>
                                             </constraints>
@@ -81,10 +80,10 @@
                                                 <constraint firstAttribute="height" constant="13" id="i8J-fW-f4h"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDz-Tb-cI4">
-                                            <rect key="frame" x="122" y="118" width="24" height="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDz-Tb-cI4">
+                                            <rect key="frame" x="122" y="118" width="35" height="15"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="24" id="6P8-Ic-lAE"/>
+                                                <constraint firstAttribute="width" constant="35" id="6P8-Ic-lAE"/>
                                                 <constraint firstAttribute="height" constant="15" id="M8F-63-AUs"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -97,7 +96,8 @@
                                         <constraint firstItem="eDz-Tb-cI4" firstAttribute="centerY" secondItem="aop-Ec-yZT" secondAttribute="centerY" id="Cpk-to-zRZ"/>
                                         <constraint firstItem="HBk-1o-C4t" firstAttribute="top" secondItem="iR8-hI-aBy" secondAttribute="topMargin" constant="15" id="G7f-T5-NTC"/>
                                         <constraint firstItem="phq-2s-HQC" firstAttribute="leading" secondItem="MMN-SQ-a0D" secondAttribute="trailing" constant="10" id="NWW-6k-kDR"/>
-                                        <constraint firstItem="phq-2s-HQC" firstAttribute="top" secondItem="HBk-1o-C4t" secondAttribute="bottom" constant="10" id="XBC-eE-EhT"/>
+                                        <constraint firstItem="phq-2s-HQC" firstAttribute="top" secondItem="HBk-1o-C4t" secondAttribute="bottom" constant="5" id="XBC-eE-EhT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="HBk-1o-C4t" secondAttribute="trailing" constant="15" id="ZM6-06-UxC"/>
                                         <constraint firstItem="aop-Ec-yZT" firstAttribute="leading" secondItem="MMN-SQ-a0D" secondAttribute="trailing" constant="10" id="a74-95-bgb"/>
                                         <constraint firstItem="HBk-1o-C4t" firstAttribute="leading" secondItem="MMN-SQ-a0D" secondAttribute="trailing" constant="10" id="do4-ZG-Jwu"/>
                                         <constraint firstItem="eDz-Tb-cI4" firstAttribute="leading" secondItem="aop-Ec-yZT" secondAttribute="trailing" constant="5" id="gPN-px-XzD"/>
@@ -128,7 +128,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dwr-jM-VfT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="927.536231884058" y="96.428571428571431"/>
+            <point key="canvasLocation" x="877" y="96"/>
         </scene>
         <!--DetailView-->
         <scene sceneID="twV-kS-7rM">
@@ -138,7 +138,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4v-dX-MBY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1636" y="96"/>
+            <point key="canvasLocation" x="1443" y="96"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Q1-pY-7Tl">
