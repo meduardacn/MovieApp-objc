@@ -11,25 +11,29 @@
 #import "DetailsViewController.h"
 
 @interface ListViewController (){
-    NSArray* popular;
-    NSArray* nowPlaying;
+    NSMutableArray* popular;
+    NSMutableArray* nowPlaying;
     NSCache<NSString*, NSData*> *cache;
+    int page;
 }
+- (void) loadPopularMovies:(int)page;
+- (void) loadNowPlayingMovies:(int)page;
 
-- (void) loadPopularMovies;
-- (void) loadNowPlayingMovies;
 @end
 
 @implementation ListViewController
+bool hasMoreMovies = NO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    page = 1;
     cache = [[NSCache alloc] init];
-    [self loadPopularMovies];
-    [self loadNowPlayingMovies];
-    
+    popular = [[NSMutableArray alloc]init ];
+    nowPlaying = [[NSMutableArray alloc]init ];
+    [self loadPopularMovies:page];
+    [self loadNowPlayingMovies:page];
 }
 
 // MARK: - TableView Properties
@@ -49,13 +53,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return section == 0 ? 2 : 10;
+    return section == 0 ? 2 : nowPlaying.count;
 }
 
 // MARK: - Cell Properties
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"cellID" forIndexPath:indexPath];
     Movie* movie = nil;
+    if(popular.count == 0 || nowPlaying.count == 0) return cell;
     if(indexPath.section == 0) movie = [popular objectAtIndex: indexPath.row];
     else movie = [nowPlaying objectAtIndex: indexPath.row];
     cell.movie = movie;
@@ -68,12 +73,13 @@
     if(!posterData){
         [Network fetchPosterWithPath:movie.poster_path withCompletionHandler: ^(NSData* poster){
             [self->cache setObject:poster forKey:movie.poster_path];
-            cell.moviePoster.image = [ UIImage imageWithData:poster];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.moviePoster.image = [ UIImage imageWithData:poster];
+            });
         }];
     }else{
         cell.moviePoster.image = [ UIImage imageWithData:posterData];
     }
-    
     return cell;
 }
 
@@ -94,23 +100,32 @@
 }
 
 //MARK: private functions
-- (void) loadPopularMovies{
-    [Network fetchMovies: @("popular") withCompletionHandler: ^(NSArray* movies){
-        self->popular = movies;
+- (void) loadPopularMovies:(int)page{
+    [Network fetchMovies:@("popular") onPage: page withCompletionHandler: ^(NSArray* movies){
+        [self->popular addObjectsFromArray:movies];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     }];
 }
 
-- (void) loadNowPlayingMovies{
-    [Network fetchMovies: @("now_playing") withCompletionHandler: ^(NSArray* movies){
-        self->nowPlaying = movies;
+- (void) loadNowPlayingMovies: (int)page{
+    [Network fetchMovies: @("now_playing") onPage: page withCompletionHandler: ^(NSArray* movies){
+        [self->nowPlaying addObjectsFromArray: movies];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     }];
 }
 
+//MARK: Pagination
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(nowPlaying.count>1){
+        if(indexPath.row == nowPlaying.count-1){
+            page++;
+            [self loadNowPlayingMovies:page];
+        }
+    }
+}
 
 @end
