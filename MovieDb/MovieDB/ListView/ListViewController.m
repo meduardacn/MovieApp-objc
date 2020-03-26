@@ -13,7 +13,7 @@
 @interface ListViewController (){
     NSArray* popular;
     NSArray* nowPlaying;
-    NSCache* cache;
+    NSCache<NSString*, NSData*> *cache;
 }
 
 - (void) loadPopularMovies;
@@ -111,4 +111,6 @@
         });
     }];
 }
+
+
 @end
